@@ -1,0 +1,32 @@
+
+
+spring:
+  datasource:
+    driver-class-name: "org.postgresql.Driver"
+    username: "postgres"
+    password: "!Test1234!"
+
+
+  cloud.stream:
+    function:
+      definition: process
+      bindings:
+        process-in-0: words
+        process-out-0: counts
+#      bindings:
+#        input:
+#          destination: input
+#        output:
+#          destination: output
+
+    kafka:
+      streams:
+        binder:
+          applicationId: hello-word-count-sample
+          configuration:
+            commit.interval.ms: 100
+            default:
+              key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+              value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+server:
+  port: 8083
